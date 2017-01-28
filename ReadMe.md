@@ -11,16 +11,16 @@ Creates the main structure of a C++ library, including main .cpp and .h files, d
   * Download the scripts in a folder of your choice  
   `git clone https://github.com/angelsantamaria/scripts.git`  
 
-  * Add the following line to your `bashrc` in order to execute the scripts from any console path
+  * Add the following line to your `bashrc` in order to execute the scripts from any console path  
   `echo "source `pwd`/scripts/setup.bash" >> ~/.bashrc`
 
-  * Example of usage
+  * Example of usage  
   `create_cpp_project.sh -n Example` 
 
   * Options:
-    * -n: Project name
-    * -d: Project dependencies
-    * -h: Help
+    - n: Project name
+    - d: Project dependencies
+    - h: Help
 
 
 
