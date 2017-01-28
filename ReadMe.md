@@ -12,7 +12,7 @@ Creates the main structure of a C++ library, including main .cpp and .h files, d
   `git clone https://github.com/angelsantamaria/scripts.git`  
 
   * Add the following line to your `bashrc` in order to execute the scripts from any console path  
-  `echo "source \` pwd\` /scripts/setup.bash" >> ~/.bashrc`
+  `echo "source ```pwd```/scripts/setup.bash" >> ~/.bashrc`
 
   * Example of usage  
   `create_cpp_project.sh -n Example` 
