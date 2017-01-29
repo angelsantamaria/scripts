@@ -91,7 +91,7 @@ This package is licensed under a [GPL 3.0 License](http://www.gnu.org/licenses/g
 
 Copyright (C) 2017  
 
-http://www.angelsantamaria.eu  
+[http://www.angelsantamaria.eu](http://www.angelsantamaria.eu)  
 
 All rights reserved.  
 
