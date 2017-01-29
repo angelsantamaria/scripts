@@ -125,8 +125,10 @@ fi
 arr=$(echo $DEP | tr "," "\n")
 
 #Set the project name on the ReadMe.txt disclaimer file
-sed 's/project_name/'$NAME'/g' <ReadMe_template.md >./ReadMe.md
+sed 's/project_name/'$NAME'/g' <ReadMe_template.md >./tmp.md
+sed 's/library_name/'$NAME'/g' <tmp.md >./ReadMe.md
 rm ReadMe_template.md
+rm tmp.md
 
 #Set the project name on the CMakeLists.txt script file
 sed 's/project_name/'$NAME'/g' <CMakeLists_template.txt >./CMakeLists.txt
