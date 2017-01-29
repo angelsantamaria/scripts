@@ -140,37 +140,45 @@ mv doxygen_template.conf ./doc/doxygen.conf
 #create the CMakeLists.txt script file
 echo "# library source files" >> CMakeLists.tmp
 echo "SET(sources ${NAME}.cpp)" >> CMakeLists.tmp
+echo "" >> CMakeLists.tmp
 echo "# application header files" >> CMakeLists.tmp
 echo "SET(headers ${NAME}.h)" >> CMakeLists.tmp
+echo "" >> CMakeLists.tmp
 echo "# locate the necessary dependencies" >> CMakeLists.tmp
 for x in $arr
 do
   echo "FIND_PACKAGE($x REQUIRED)" >> CMakeLists.tmp
 done
+echo "" >> CMakeLists.tmp
 echo "# add the necessary include directories" >> CMakeLists.tmp
 echo "INCLUDE_DIRECTORIES(.)" >> CMakeLists.tmp
 for x in $arr
 do
   echo "INCLUDE_DIRECTORIES("'${'"${x}_INCLUDE_DIR"'}'")" >> CMakeLists.tmp
 done
+echo "" >> CMakeLists.tmp
 echo "# create the shared library" >> CMakeLists.tmp
 echo "ADD_LIBRARY(${NAME} SHARED "'${'"sources"'}'")" >> CMakeLists.tmp
+echo "" >> CMakeLists.tmp
 echo "# link necessary libraries" >> CMakeLists.tmp
 for x in $arr
 do
   echo "TARGET_LINK_LIBRARIES(${NAME} "'${'"${x}_LIBRARY"'}'")" >> CMakeLists.tmp
 done
+echo "" >> CMakeLists.tmp
 echo "INSTALL(TARGETS $NAME" >> CMakeLists.tmp
 echo "        RUNTIME DESTINATION bin" >> CMakeLists.tmp
 echo "        LIBRARY DESTINATION lib/${LIBRARY_NAME}" >> CMakeLists.tmp
 echo "        ARCHIVE DESTINATION lib/${LIBRARY_NAME})" >> CMakeLists.tmp
 echo "INSTALL(FILES "'${'"headers"'}' "DESTINATION include/${LIBRARY_NAME})" >> CMakeLists.tmp
 echo "INSTALL(FILES ../Find$NAME.cmake DESTINATION "'${'"CMAKE_ROOT"'}'"/Modules/)" >> CMakeLists.tmp
+echo "" >> CMakeLists.tmp
 echo "ADD_SUBDIRECTORY(examples)" >> CMakeLists.tmp
 mv CMakeLists.tmp ./src/CMakeLists.txt
   
 echo "# create an example application" >> CMakeLists.tmp
 echo "ADD_EXECUTABLE(${NAME}_test ${NAME}_test.cpp)" >> CMakeLists.tmp
+echo "" >> CMakeLists.tmp
 echo "# link necessary libraries" >> CMakeLists.tmp
 echo "TARGET_LINK_LIBRARIES(${NAME}_test $NAME)" >> CMakeLists.tmp
 for x in $arr
