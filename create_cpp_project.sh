@@ -185,9 +185,9 @@ do
 done
 echo "INSTALL(TARGETS $NAME" >> CMakeLists.tmp
 echo "        RUNTIME DESTINATION bin" >> CMakeLists.tmp
-echo "        LIBRARY DESTINATION lib/${LIBRARY_NAME}" >> CMakeLists.tmp
-echo "        ARCHIVE DESTINATION lib/${LIBRARY_NAME})" >> CMakeLists.tmp
-echo "INSTALL(FILES "'${'"headers"'}' "DESTINATION include/${LIBRARY_NAME})" >> CMakeLists.tmp
+echo "        LIBRARY DESTINATION lib/${NAME}" >> CMakeLists.tmp
+echo "        ARCHIVE DESTINATION lib/${NAME})" >> CMakeLists.tmp
+echo "INSTALL(FILES "'${'"headers"'}' "DESTINATION include/${NAME})" >> CMakeLists.tmp
 echo "INSTALL(FILES ../Find$NAME.cmake DESTINATION "'${'"CMAKE_ROOT"'}'"/Modules/)" >> CMakeLists.tmp
 echo "ADD_SUBDIRECTORY(examples)" >> CMakeLists.tmp
 mv CMakeLists.tmp $ORIGNAME/src/CMakeLists.txt
