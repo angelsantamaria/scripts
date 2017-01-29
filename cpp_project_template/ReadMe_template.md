@@ -12,83 +12,80 @@ This package requires of the following libraries and packages
     [graphviz](http://www.graphviz.org) to generate the documentation
   * stdc++  
 
-  Under linux all of these utilities are available in 
-  ready-to-use packages.  
+Under linux all of these utilities are available in ready-to-use packages.  
 
-  Under MacOS most of the packages are available via 
-  [fink](http://www.finkproject.org).  
+Under MacOS most of the packages are available via [fink](http://www.finkproject.org).  
 
 #### Compilation
 
   Just download this package, uncompress it, and execute  
 
-   * `cd build`
-   * `cmake ..`  
+  `cd build`  
+  `cmake ..`  
 
-  to generate the makefile and then  
+to generate the makefile and then  
 
-   * `make`  
-  
-  to obtain the shared library and also all the example programs.  
+  `make`  
 
-  The *cmake* only need to be executed once (make will automatically call
-  *cmake* if you modify one of the `CMakeList.txt` files).  
+to obtain the shared library and also all the example programs.  
 
-  To generate this documentation type  
+The *cmake* only needs to be executed once (make will automatically call *cmake* 
+if you modify one of the `CMakeList.txt` files).  
 
-    * `make doc`  
+To generate this documentation type  
 
-  The files in the `build` directory are genetated by *cmake*
-  and *make* and can be safely removed.
-  After doing so you will need to call cmake manually again.  
+  `make doc`  
+
+The files in the `build` directory are genetated by *cmake* and *make* 
+and can be safely removed.  
+After doing so you will need to call cmake manually again.  
 
 #### Configuration  
 
-  The default build mode is DEBUG. That is, objects and executables 
-  include debug information.  
+The default build mode is DEBUG. That is, objects and executables include debug information.  
 
-  The RELEASE build mode optimizes for speed. To build in this mode
-  execute  
+The RELEASE build mode optimizes for speed. To build in this mode execute  
 
-    * `cmake .. -DCMAKE_BUILD_TYPE=RELEASE` 
+  `cmake .. -DCMAKE_BUILD_TYPE=RELEASE`  
 
-  The release mode will be kept until next time cmake is executed.  
+The release mode will be kept until next time cmake is executed.  
 
 #### Installation
 
-  In order to be able to use the library, it it necessary to copy it into the system.
-  To do that, execute  
+In order to be able to use the library, it it necessary to copy it into the system. 
+To do that, execute  
 
-    * make install  
+  `make install`  
 
-  as root and the shared libraries will be copied to `/usr/local/lib/<project_name>` directory
-  and the header files will be copied to `/usr/local/include/<project_name>` directory. At 
-  this point, the library may be used by any user.  
+as root and the shared libraries will be copied to `/usr/local/lib/<project_name>` directory
+and the header files will be copied to `/usr/local/include/<project_name>` directory. At 
+this point, the library may be used by any user.  
 
-  To remove the library from the system, exceute  
-    * `make uninstall`  
+To remove the library from the system, exceute  
 
-  as root, and all the associated files will be removed from the system.  
+  `make uninstall`  
+
+as root, and all the associated files will be removed from the system.  
 
 ## Customization  
 
-  To build a new application using these library, first it is necessary to locate if the library
-  has been installed or not using the following command in your `CMakeLists.txt`  
+To build a new application using these library, first it is necessary to locate if the library
+has been installed or not using the following command in your `CMakeLists.txt`  
 
-    * `FIND_PACKAGE(library_name REQUIRED)`  
+  `FIND_PACKAGE(library_name REQUIRED)`  
 
-  In the case that the package is present, it is necessary to add the header files directory to
-  the include directory path by using  
+In the case that the package is present, it is necessary to add the header files directory to
+the include directory path by using  
 
-    * `INCLUDE_DIRECTORIES(${library_name_INCLUDE_DIR})`
+  `INCLUDE_DIRECTORIES(${library_name_INCLUDE_DIR})`
 
-  Finally, it is also nevessary to link with the desired libraries by using the following command  
+Finally, it is also nevessary to link with the desired libraries by using the following command  
 
-    * `TARGET_LINK_LIBRARIES(<executable name> ${library_name_LIBRARY})`
+  `TARGET_LINK_LIBRARIES(<executable name> ${library_name_LIBRARY})`
 
 ## License
 
-  This package is licensed under a [GPL 3.0 License](http://www.gnu.org/licenses/gpl.html)
+This package is licensed under a [GPL 3.0 License](http://www.gnu.org/licenses/gpl.html)
 
 #### Disclaimer
 
