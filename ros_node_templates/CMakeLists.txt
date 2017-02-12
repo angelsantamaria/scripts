@@ -6,10 +6,7 @@ find_package(catkin REQUIRED)
 # ******************************************************************** 
 #                 Add catkin additional components here
 # ******************************************************************** 
-find_package(catkin REQUIRED COMPONENTS 
-  roscpp
-  roslib 
-  dynamic_reconfigure
+find_package(catkin REQUIRED COMPONENTS roscpp roslib dynamic_reconfigure
 )
 
 ## System dependencies are found with CMake's conventions

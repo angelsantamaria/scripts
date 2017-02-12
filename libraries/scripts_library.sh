@@ -383,36 +383,9 @@ function goto_catkin_workspace
   fi
 }
 
-function check_package_file_integrity
-{
-  local comment=""
-
-  # check the package.xml file
-  comment="<build_depend>iri_base_algorithm<\/build_depend>"
-  find_comment_in_file "${comment}" "package.xml"
-  if [[ "${comment_found}" = "false" ]]
-  then
-    kill_exit "<build_depend>iri_base_algorithm<\/build_depend> missing in package.xml file"
-  fi
- 
-  comment="<run_depend>iri_base_algorithm<\/run_depend>"
-  find_comment_in_file "${comment}" "package.xml"
-  if [[ "${comment_found}" = "false" ]]
-  then
-    kill_exit "<run_depend>iri_base_algorithm<\/run_depend> missing in package.xml file"
-  fi
-}
-
 function check_cmakelists_file_integrity
 {
   local comment=""
-  local old_line=""
-
-  old_line=$(grep "find_package(catkin REQUIRED COMPONENTS" "CMakeLists.txt")
-  if [[ $old_line != *iri_base_algorithm* ]]
-  then
-    kill_exit "Missing iri_base_algorithm in the catkin REQUIRED COMPONENTS list in file CMakeLists.txt. (multiline not supported)"
-  fi
 
   comment="add_dependencies(\${PROJECT_NAME} <msg_package_name>_generate_messages_cpp)"
   find_comment_in_file "${comment}" "CMakeLists.txt"
@@ -436,18 +409,20 @@ function add_build_run_dependencies
     if [[ "${comment_found}" = "false" ]]
     then
       line="<build_depend>${new_pkg}<\/build_depend>"
-      comment="<build_depend>iri_base_algorithm<\/build_depend>"
+      comment="<build_depend>roslib<\/build_depend>"
       add_line_to_file "\ \ ${line}" "${comment}" "package.xml"
     else
       echo "Build dependencies already included."
     fi
+
+  
 
     line="<run_depend>${new_pkg}<\/run_depend>"
     find_comment_in_file "${line}" "package.xml"
     if [[ "${comment_found}" = "false" ]]
     then
       line="<run_depend>${new_pkg}<\/run_depend>"
-      comment="<run_depend>iri_base_algorithm<\/run_depend>"
+      comment="<run_depend>roslib<\/run_depend>"
       add_line_to_file "\ \ ${line}" "${comment}" "package.xml"
     else
       echo "Run dependencies already included."
@@ -472,14 +447,21 @@ function add_cmake_dependencies
     then
       echo "Dependency already included in CMakeLists.txt file.";
     else
-      old_string="iri_base_algorithm"
+      old_string=" dynamic_reconfigure"
       new_string="${old_string}\ ${new_pkg}"
       sed -i "s/${old_string}/${new_string}/g" "CMakeLists.txt"
     fi
 
-    line="add_dependencies(\${PROJECT_NAME} ${new_pkg}_generate_messages_cpp)"
-    comment="add_dependencies(\${PROJECT_NAME} <msg_package_name>_generate_messages_cpp)"
-    add_line_to_file "${line}" "${comment}" "CMakeLists.txt"
+    # check if dependency has messages to be build previously
+    roscd "${new_pkg}"
+    if [ -d "msg" ]
+    then
+      roscd "${ros_pkg}"
+      line="add_dependencies(\${PROJECT_NAME} ${new_pkg}_generate_messages_cpp)"
+      comment="add_dependencies(\${PROJECT_NAME} <msg_package_name>_generate_messages_cpp)"
+      add_line_to_file "${line}" "${comment}" "CMakeLists.txt"
+    fi
+    roscd "${ros_pkg}"
   fi
 }
 
