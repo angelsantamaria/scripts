@@ -31,7 +31,7 @@ Creates a ROS package with a node inside the current path, written in C++, inclu
   * Example of usage  
   `create_ros_node.sh -n example` 
 
-#### ROS node publisher/subscriber
+#### ROS topic publisher/subscriber
 
 Adds a publisher/subscriber to an existing node, written in C++.
 
@@ -44,3 +44,16 @@ Adds a publisher/subscriber to an existing node, written in C++.
     - t: Publisher/subscriber name inside the code
     - m: Message type
     - b: Buffer length
+
+#### ROS service client/server
+
+Adds a service client/server to an existing node, written in C++.
+
+  * Example of usage  
+  `add_service_server_client.sh -o client -p example -s example_srv -m Empty.srv`
+
+  * Options:
+    - o: Type (client/server)
+    - p: Node inwhich the service client/server will be added
+    - s: Client/Server name inside the code
+    - m: Service message type
