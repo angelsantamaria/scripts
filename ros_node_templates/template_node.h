@@ -1,9 +1,7 @@
-// Copyright (C) 2010-2011 Institut de Robotica i Informatica Industrial, CSIC-UPC.
-// Author 
+// Copyright (C)
 // All rights reserved.
 //
-// This file is part of iri-ros-pkg
-// iri-ros-pkg is free software: you can redistribute it and/or modify
+// This file is part of a free software package: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // at your option) any later version.
@@ -16,11 +14,9 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
-// IMPORTANT NOTE: This code has been generated through a script from the 
-// iri_ros_scripts. Please do NOT delete any comments to guarantee the correctness
-// of the scripts. ROS topics can be easly add by using those scripts. Please
-// refer to the IRI wiki page for more information:
-// http://wikiri.upc.es/index.php/Robotics_Lab
+// IMPORTANT NOTE: This code has been generated through a script. 
+// Please do NOT delete any comments to guarantee the correctness
+// of the scripts. ROS topics can be easly add by using those scripts. 
 
 #ifndef _template_node_h_
 #define _template_node_h_
@@ -44,7 +40,7 @@
 // [action server client headers]
 
 /**
- * \brief IRI ROS Specific Algorithm Class
+ * \brief Algorithm Class
  *
  */
 class TemplateNode

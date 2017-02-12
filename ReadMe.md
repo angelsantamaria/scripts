@@ -55,5 +55,18 @@ Adds a service client/server to an existing node, written in C++.
   * Options:
     - o: Type (client/server)
     - p: Node inwhich the service client/server will be added
-    - s: Client/Server name inside the code
+    - s: Service client/server name inside the code
     - m: Service message type
+
+#### ROS action client/server
+
+Adds a action client/server to an existing node, written in C++.
+
+  * Example of usage  
+  `add_action_server_client.sh -o client -p example -s example_action -m Test.action`
+
+  * Options:
+    - o: Type (client/server)
+    - p: Node inwhich the service client/server will be added
+    - a: Action client/server name inside the code
+    - m: Action message type

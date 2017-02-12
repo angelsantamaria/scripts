@@ -125,7 +125,7 @@ class ActionServer
     *
     * This is the ROS simple action server execute callback which is called in a
     * separate thread whenever a new goal is received. This function implements
-    * the IRI action server logic on top of the ROS simple action server policy.
+    * the action server logic on top of the ROS simple action server policy.
     *
     * This function controls the life-cycle of a single goal, since it is received
     * until achieves a terminal state. User callbacks are triggered to monitor

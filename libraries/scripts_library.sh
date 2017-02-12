@@ -27,11 +27,11 @@ function check_libraries
       popd
     else
       popd
-      kill_exit "Missing some script files, please download IRI_ROS scripts again, aborting ..."
+      kill_exit "Missing some script files, please download the scripts again, aborting ..."
     fi
   else
     popd
-    kill_exit "Missing libraries folder, please download IRI_ROS scripts again, aborting ..."
+    kill_exit "Missing libraries folder, please download the scripts again, aborting ..."
   fi
 }
 
@@ -50,11 +50,11 @@ function check_templates
       popd
     else
       popd
-      kill_exit "Missing some generic algorithm template files, please download IRI_ROS scripts again, aborting ..."
+      kill_exit "Missing some generic algorithm template files, please download the scripts again, aborting ..."
     fi
   else
     popd
-    kill_exit "Missing generic algorithm templates folder, please download IRI_ROS scripts again, aborting ..."
+    kill_exit "Missing generic algorithm templates folder, please download the scripts again, aborting ..."
   fi
 }
 
@@ -256,7 +256,7 @@ function add_pkg_to_packagexml
   if [[ -z "${pub1}" ]]
   then
     echo "Adding package \"${file_pkg}\" as dependency..."
-    local comment="\"iri_base_"
+    local comment="\"base_"
     pub="<build_depend>${file_pkg}<build_depend/>"
     sed -i -e "/${comment}/a\\  ${pub}" "package.xml"
   else

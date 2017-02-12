@@ -76,7 +76,7 @@ if [[ -z "${result}" ]]
 then
   roscd ${ros_pkg}
 else
-  kill_exit "ROS package ${ros_pkg} does NOT exist yet, please first run iri_ros_create_package.sh"
+  kill_exit "ROS package ${ros_pkg} does NOT exist yet, please first run create_ros_node.sh"
 fi
 
 check_package "${ros_pkg}"
@@ -84,7 +84,7 @@ if [[ ${pkg_exists} == true ]]
 then
   roscd ${ros_pkg}
 else
-  kill_exit "ROS package ${ros_pkg} does NOT exist yet, please first run iri_ros_create_package.sh"
+  kill_exit "ROS package ${ros_pkg} does NOT exist yet, please first run create_ros_node.sh"
 fi
 
 #validate file extension .msg

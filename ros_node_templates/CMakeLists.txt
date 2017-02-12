@@ -59,7 +59,7 @@ catkin_package(
 #  INCLUDE_DIRS 
 #  LIBRARIES 
 # ******************************************************************** 
-#            Add ROS and IRI ROS run time dependencies
+#            Add ROS run time dependencies
 # ******************************************************************** 
  CATKIN_DEPENDS roscpp roslib dynamic_reconfigure
 # ******************************************************************** 
