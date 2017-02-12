@@ -21,7 +21,7 @@ function check_libraries
   if [[ -d "${SCRIPTS_PATH}/libraries" ]]
   then
     pushd "${SCRIPTS_PATH}/libraries"
-    if [[ -e "create_server.sh" ]] && [[ -e "create_client.sh" ]] && [[ -e "create_publisher.sh" ]] && [[ -e "create_subscriber.sh" ]]
+    if [[ -e "create_service_server.sh" ]] && [[ -e "create_service_client.sh" ]] && [[ -e "create_publisher.sh" ]] && [[ -e "create_subscriber.sh" ]]
     then
       echo "All library files available"
       popd
