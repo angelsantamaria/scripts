@@ -63,6 +63,8 @@ catkin_create_pkg ${project_name} roscpp roslib dynamic_reconfigure
 if [ $? -eq 0 ]
 then
   echo "Package created successfully"
+  #remove automatically created folder, and no longer needed
+  rm -rf ${project_name}/include/${project_name}
 else
   exit 1;
 fi

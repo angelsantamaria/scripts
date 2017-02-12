@@ -262,13 +262,6 @@ function create_publisher
         sed -i "/${comment}/s|$| :|" "${node_c}"
         add_line_to_file "\ \ ${line}" "${comment}" "${node_c}"
       else
-      #   #check if it is an algorithm or a driver
-      #   if [[ ${driver_alg} == "alg" ]]
-      #   then
-      #     comment="::IriBaseAlgorithm<"
-      #   else
-      #     comment="::IriBaseNodeDriver<"
-      #   fi
         #check if ',' is needed
         add_char=`grep "${comment}" "${node_c}" | grep ","`
         if [[ -z ${add_char} ]]
@@ -291,13 +284,6 @@ function create_publisher
       sed -i "/${comment}/s|$| :|" "${node_c}"
       add_line_to_file "\ \ ${line}" "${comment}" "${node_c}"
     else
-      #check if it is an algorithm or a driver
-      # if [[ ${driver_alg} == "alg" ]]
-      # then
-      #   comment="::IriBaseAlgorithm<"
-      # else
-      #   comment="::IriBaseNodeDriver<"
-      # fi
       #check if ',' is needed
       add_char=`grep "${comment}" "${node_c}" | grep ","`
       if [[ -z ${add_char} ]]

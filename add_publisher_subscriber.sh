@@ -120,12 +120,13 @@ else
   kill_exit "No buffer provided, aborting ..."  
 fi
 
-#retrieve header and source files and pkg kind (algorithm/driver)
+#retrieve header and source files
 get_h_cpp_files ${ros_pkg}
 echo "node_h=${node_h}"
 echo "node_c=${node_c}"
+driver_alg="alg"
 
-if [[ -z ${node_h} ]] || [[ -z ${node_c} ]]
+if [[ -z ${node_h} ]] || [[ -z ${node_c} ]] || [[ -z ${driver_alg} ]]
 then
   kill_exit "Problems with headers and/or source files"
 fi
@@ -136,8 +137,8 @@ roscd "${ros_pkg}"
 #modify node files adding server/client parameters
 if [[ "${pub_subs}" = "publisher" ]]
 then
-  create_publisher ${ros_pkg} ${topic_name} ${msg_file%.msg} ${file_pkg} ${buffer} ${node_h} ${node_c}
+  create_publisher ${ros_pkg} ${topic_name} ${msg_file%.msg} ${file_pkg} ${buffer} ${node_h} ${node_c} ${driver_alg}
 else
-  create_subscriber ${ros_pkg} ${topic_name} ${msg_file%.msg} ${file_pkg} ${buffer} ${node_h} ${node_c}
+  create_subscriber ${ros_pkg} ${topic_name} ${msg_file%.msg} ${file_pkg} ${buffer} ${node_h} ${node_c} ${driver_alg}
 fi
 
