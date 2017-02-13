@@ -1,0 +1,7 @@
+<!--DOCTYPE html-->
+<launch>
+
+  <node pkg="template" type="template" name="template" output="screen">
+  </node>
+
+</launch>

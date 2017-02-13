@@ -123,6 +123,15 @@ sed -e "s/template/${project_name}/g" \
 echo "Creating ${node_filename} files..."
 ################################################################################
 
+################################################################################
+# create launch files
+
+mkdir -p ${project_name}/launch/
+
+sed -e "s/template/${project_name}/g" <${temps_folder}/template_launch.launch >"${project_name}/launch/${node_filename}.launch"
+echo "Creating ${node_filename} launch file..."
+################################################################################
+
 
 ################################################################################
 #Set the filename and namespace on the CMakeLists.txt file
