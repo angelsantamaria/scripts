@@ -231,7 +231,7 @@ then
   echo "    ! gitignore file already exist in bin directory, skipping ..."
 else
   echo "    > creating .gitignore file in bin directory"	
-  cp $SCRIPTS_PATH/gitignore_template $BIN_DIR/.gitignore
+  cp $SCRIPTS_PATH/cpp_project_template/gitignore_template $BIN_DIR/.gitignore
 fi
 
 if [ -f $BUILD_DIR/.gitignore ]
@@ -239,7 +239,7 @@ then
   echo "    ! gitignore file already exist in build directory, skipping ..."
 else
   echo "    > creating .gitignore file in build directory"	
-  cp $SCRIPTS_PATH/gitignore_template $BUILD_DIR/.gitignore
+  cp $SCRIPTS_PATH/cpp_project_template/gitignore_template $BUILD_DIR/.gitignore
 fi
 
 if [ -f $LIB_DIR/.gitignore ]
@@ -247,7 +247,7 @@ then
   echo "    ! gitignore file already exist in lib directory, skipping ..."
 else
   echo "    > creating .gitignore file in lib directory"	
-  cp $SCRIPTS_PATH/gitignore_template $LIB_DIR/.gitignore
+  cp $SCRIPTS_PATH/cpp_project_template/gitignore_template $LIB_DIR/.gitignore
 fi
 
 echo "Project created."

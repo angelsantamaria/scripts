@@ -7,7 +7,7 @@ Helpful scripts to create C++ and ROS projects
   * Download the scripts in a folder of your choice  
   `git clone https://github.com/angelsantamaria/scripts.git`  
 
-  * Add the following line to your `bashrc` in order to execute the scripts from any console path  
+  * Run the following line to set your `bashrc`. This will allow you to execute the scripts from any console path.  
   ``echo "source `pwd`/scripts/setup.bash" >> ~/.bashrc``
 
 ## Main scripts
