@@ -148,7 +148,7 @@ fi
 #parse the dependencies and create the dependencies file
 arr=$(echo $DEP | tr "," "\n")
 
-#Set the project name on the ReadMe.txt disclaimer file
+#Set the project name on the ReadMe.txt file
 sed 's/project_name/'$ORIGNAME'/g' <$TEMPLATES_PATH/ReadMe_template.md >tmp.md
 sed 's/library_name/'$NAME'/g' <tmp.md >$ORIGNAME/ReadMe.md
 rm tmp.md
@@ -202,9 +202,13 @@ do
 done
 mv CMakeLists.tmp $ORIGNAME/src/examples/CMakeLists.txt
 
+
+#Set the project name on the Findlib.cmake file
 sed 's/header_file/'"${NAME}.h"'/g' <$TEMPLATES_PATH/Findlib_template.cmake >tmp.cmake
-sed 's/library_name/'$NAME'/g' <tmp.cmake >$ORIGNAME/Find$NAME.cmake
+sed 's/project_name/'$ORIGNAME'/g' <tmp.cmake >tmp2.cmake
+sed 's/library_name/'$NAME'/g' <tmp2.cmake >$ORIGNAME/Find$NAME.cmake
 rm tmp.cmake
+rm tmp2.cmake
 
 LIBRARY_NAME=$(echo $NAME | tr '[:lower:]' '[:upper:]')
 Library_name=$(echo $NAME | sed 's/\([a-zA-Z]\)\([a-zA-Z0-9]*\)/\u\1\2/g')
