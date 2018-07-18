@@ -255,12 +255,24 @@ function add_pkg_to_packagexml
   local pub1=$(grep "${pub}" "package.xml")
   if [[ -z "${pub1}" ]]
   then
-    echo "Adding package \"${file_pkg}\" as dependency..."
+    echo "Adding package \"${file_pkg}\" as build dependency..."
     local comment="\"base_"
     pub="<build_depend>${file_pkg}<build_depend/>"
     sed -i -e "/${comment}/a\\  ${pub}" "package.xml"
   else
-    echo "Package \"${file_pkg}\" already added as dependency, skipping"
+    echo "Package \"${file_pkg}\" already added as build dependency, skipping"
+  fi
+
+  local pub="<build_export_depend>${file_pkg}<build_export_depend/>"
+  local pub1=$(grep "${pub}" "package.xml")
+  if [[ -z "${pub1}" ]]
+  then
+    echo "Adding package \"${file_pkg}\" as build export dependency..."
+    local comment="\"base_"
+    pub="<build_export_depend>${file_pkg}<build_export_depend/>"
+    sed -i -e "/${comment}/a\\  ${pub}" "package.xml"
+  else
+    echo "Package \"${file_pkg}\" already added as build export dependency, skipping"
   fi
 }
 
@@ -404,6 +416,19 @@ function add_build_run_dependencies
 
   if [[ "${new_pkg}" != "${ros_pkg}" ]]
   then
+
+    line="<exec_depend>${new_pkg}<\/exec_depend>"
+    find_comment_in_file "${line}" "package.xml"
+    if [[ "${comment_found}" = "false" ]]
+    then
+      line="<exec_depend>${new_pkg}<\/exec_depend>"
+      comment="<exec_depend>roslib<\/exec_depend>"
+      add_line_to_file "\ \ ${line}" "${comment}" "package.xml"
+    else
+      echo "Build dependencies already included."
+    fi
+
+
     line="<build_depend>${new_pkg}<\/build_depend>"
     find_comment_in_file "${line}" "package.xml"
     if [[ "${comment_found}" = "false" ]]
@@ -415,18 +440,28 @@ function add_build_run_dependencies
       echo "Build dependencies already included."
     fi
 
-  
-
-    line="<run_depend>${new_pkg}<\/run_depend>"
+    line="<build__export_depend>${new_pkg}<\/build_export_depend>"
     find_comment_in_file "${line}" "package.xml"
     if [[ "${comment_found}" = "false" ]]
     then
-      line="<run_depend>${new_pkg}<\/run_depend>"
-      comment="<run_depend>roslib<\/run_depend>"
+      line="<build_export_depend>${new_pkg}<\/build_export_depend>"
+      comment="<build_export_depend>roslib<\/build_export_depend>"
       add_line_to_file "\ \ ${line}" "${comment}" "package.xml"
     else
-      echo "Run dependencies already included."
+      echo "Build dependencies already included."
     fi
+  
+
+#    line="<run_depend>${new_pkg}<\/run_depend>"
+#    find_comment_in_file "${line}" "package.xml"
+#    if [[ "${comment_found}" = "false" ]]
+#    then
+#      line="<run_depend>${new_pkg}<\/run_depend>"
+#      comment="<run_depend>roslib<\/run_depend>"
+#      add_line_to_file "\ \ ${line}" "${comment}" "package.xml"
+#    else
+#      echo "Run dependencies already included."
+#    fi
   fi
 }
 
