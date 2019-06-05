@@ -68,6 +68,10 @@ then
 else
   exit 1;
 fi
+
+#create main class filename
+class_filename="${input_name}"
+
 #create alg filename
 alg_filename="${input_name}_alg"
 
@@ -83,11 +87,36 @@ create_basename ${input_name}
 #create templates folder path name
 temps_folder="${SCRIPTS_PATH}/ros_node_templates/"
 
+
+################################################################################
+# create template class .h and .cpp files
+
+#create node basename
+class_basename="${basename}Node"
+#create alg basename
+alg_basename="${basename}Algorithm"
+#create node basename
+node_basename="${basename}Node"
+
+#Set the filename and namespace on the template_node files
+sed -e "s/template_alg/${alg_filename}/g" \
+    -e "s/TemplateAlg/${alg_basename}/g" \
+    -e "s/template_node/${node_filename}/g" \
+    -e "s/template_namespace/${project_name}/g" \
+    -e "s/TemplateNode/${class_basename}/g" <${temps_folder}/template.h >"${project_name}/include/${class_filename}.h"
+sed -e "s/template/${project_name}/g" \
+    -e "s/template_node/${node_filename}/g" \
+    -e "s/TemplateAlg/${alg_basename}/g" \
+    -e "s/template_namespace/${project_name}/g" \
+    -e "s/TemplateNode/${class_basename}/g" <${temps_folder}/template.cpp >"${project_name}/src/${class_filename}.cpp"
+echo "Creating ${node_filename} files..."
+################################################################################
+
+
 ################################################################################
 # create template alg .h and .cpp files
 
-#create alg basename
-alg_basename="${basename}Algorithm"
+
 
 mkdir -p ${project_name}/include/
 mkdir -p ${project_name}/src/
@@ -98,6 +127,7 @@ sed -e "s/template_alg/${alg_filename}/g" \
     -e "s/template_namespace/${project_name}/g" \
     -e "s/TemplateConfig/${basename}Config/g" <${temps_folder}/template_alg.h >"${project_name}/include/${alg_filename}.h"
 sed -e "s/template_alg/${alg_filename}/g" \
+    -e "s/template_namespace/${project_name}/g" \
     -e "s/TemplateAlg/${alg_basename}/g" <${temps_folder}/template_alg.cpp >"${project_name}/src/${alg_filename}.cpp"
 echo "Creating ${alg_filename} files..."
 ################################################################################
@@ -107,19 +137,13 @@ echo "Creating ${alg_filename} files..."
 ################################################################################
 # create template node .h and .cpp files
 
-#create node basename
-node_basename="${basename}Node"
-#echo "node_basename $node_basename"
-
 #Set the filename and namespace on the template_node files
-sed -e "s/template_alg/${alg_filename}/g" \
-    -e "s/TemplateAlg/${alg_basename}/g" \
-    -e "s/template_node/${node_filename}/g" \
-    -e "s/TemplateNode/${node_basename}/g" <${temps_folder}/template_node.h >"${project_name}/include/${node_filename}.h"
 sed -e "s/template/${project_name}/g" \
     -e "s/template_node/${node_filename}/g" \
-    -e "s/TemplateAlg/${alg_basename}/g" \
-    -e "s/TemplateNode/${node_basename}/g" <${temps_folder}/template_node.cpp >"${project_name}/src/${node_filename}.cpp"
+    -e "s/TemplateNode/${class_basename}/g" <${temps_folder}/template_node.h >"${project_name}/include/${node_filename}.h"
+sed -e "s/template/${project_name}/g" \
+    -e "s/template_node/${node_filename}/g" \
+    -e "s/TemplateNode/${class_basename}/g" <${temps_folder}/template_node.cpp >"${project_name}/src/${node_filename}.cpp"
 echo "Creating ${node_filename} files..."
 ################################################################################
 

@@ -27,6 +27,9 @@
 
 //include template_alg main library
 
+namespace template
+{
+
 /**
  * \brief define config type
  *
@@ -157,5 +160,7 @@ class TemplateAlg
     // here define all template_alg interface methods to retrieve and set
     // the driver parameters
 };
+
+} //end of namespace
 
 #endif
