@@ -1,15 +1,15 @@
-#include "template.h"
+#include "node_filename.h"
 
 /* main function */
 int main(int argc,char *argv[])
 {
-  ros::init(argc, argv, "template");
+  ros::init(argc, argv, "project_name");
   ros::NodeHandle nh(ros::this_node::getName());
   ros::Rate loop_rate(50);
 
-  dynamic_reconfigure::Server<Config> dsrv;    
+  dynamic_reconfigure::Server<project_name::Config> dsrv;    
 
-  TemplateNode node(nh, dsrv);
+  project_name::ClassNode node(nh, dsrv);
 
   while (ros::ok()) 
   {

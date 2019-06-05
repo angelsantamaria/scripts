@@ -18,10 +18,10 @@
 // Please do NOT delete any comments to guarantee the correctness
 // of the scripts. ROS topics can be easly add by using those scripts. 
 
-#ifndef _template_node_h_
-#define _template_node_h_
+#ifndef _class_filename_h_
+#define _class_filename_h_
 
-#include "template_alg.h"
+#include "alg_filename.h"
 
 // ROS
 #include <ros/ros.h>
@@ -39,14 +39,14 @@
 
 // [action server client headers]
 
-namespace template
+namespace project_name
 {
 
 /**
  * \brief Algorithm Class
  *
  */
-class TemplateNode
+class Class
 {
   private:
     // [publisher attributes]
@@ -68,7 +68,7 @@ class TemplateNode
     * interface. Will be used in the derivate class to define the common 
     * behaviour for all the different implementations from the same algorithm.
     */
-    TemplateAlg alg_;
+    ClassAlg alg_;
 
    /**
     * \brief config variable
@@ -85,7 +85,7 @@ class TemplateNode
     * This constructor initializes specific class attributes and all ROS
     * communications variables to enable message exchange.
     */
-    TemplateNode(ros::NodeHandle &nh, dynamic_reconfigure::Server<Config> &dsrv);
+    Class(ros::NodeHandle &nh, dynamic_reconfigure::Server<Config> &dsrv);
 
    /**
     * \brief Destructor
@@ -93,7 +93,7 @@ class TemplateNode
     * This destructor frees all necessary dynamic memory allocated within this
     * this class.
     */
-    ~TemplateNode(void);
+    ~Class(void);
 
    /**
     * \brief main node thread

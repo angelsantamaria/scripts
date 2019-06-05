@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(template)
+project(project_name)
 
 ## Find catkin macros and libraries
 find_package(catkin REQUIRED)
@@ -50,7 +50,7 @@ find_package(Boost REQUIRED COMPONENTS system)
 # ******************************************************************** 
 #                 Add the dynamic reconfigure file 
 # ******************************************************************** 
-generate_dynamic_reconfigure_options(cfg/Template.cfg)
+generate_dynamic_reconfigure_options(cfg/basename.cfg)
 
 # ******************************************************************** 
 #                 Add run time dependencies here
@@ -84,7 +84,7 @@ include_directories(${Boost_INCLUDE_DIRS})
 # add_library(${PROJECT_NAME} <list of source files>)
 
 ## Declare a cpp executable
-add_executable(${PROJECT_NAME} src/template_alg.cpp src/template.cpp src/template_node.cpp)
+add_executable(${PROJECT_NAME} src/alg_filename.cpp src/class_filename.cpp src/node_filename.cpp)
 
 # ******************************************************************** 
 #                   Add the libraries

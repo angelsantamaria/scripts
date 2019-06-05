@@ -1,13 +1,13 @@
-#include "template.h"
+#include "class_filename.h"
 
-namespace template
+namespace project_name
 {
 
-TemplateNode::TemplateNode(ros::NodeHandle &nh, dynamic_reconfigure::Server<Config> &dsrv) 
+ClassNode::ClassNode(ros::NodeHandle &nh, dynamic_reconfigure::Server<Config> &dsrv) 
 {
   // Dynamic Reconfigure
   dynamic_reconfigure::Server<Config>::CallbackType dsrv_cb;
-  dsrv_cb = boost::bind(&TemplateNode::DynRecCallback, this, _1, _2);
+  dsrv_cb = boost::bind(&ClassNode::DynRecCallback, this, _1, _2);
   dsrv.setCallback(dsrv_cb);
 
   //init class attributes if necessary
@@ -29,12 +29,12 @@ TemplateNode::TemplateNode(ros::NodeHandle &nh, dynamic_reconfigure::Server<Conf
   // [init action clients]
 }
 
-TemplateNode::~TemplateNode(void)
+ClassNode::~ClassNode(void)
 {
   // [free dynamic memory]
 }
 
-void TemplateNode::mainNodeThread(void)
+void ClassNode::mainNodeThread(void)
 {
   // [fill msg structures]
   
@@ -53,7 +53,7 @@ void TemplateNode::mainNodeThread(void)
 
 /*  [action requests] */
 
-void TemplateNode::DynRecCallback(Config &config, uint32_t level)
+void ClassNode::DynRecCallback(Config &config, uint32_t level)
 {
   this->alg_.lock();
   this->config_=config;

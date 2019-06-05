@@ -18,10 +18,10 @@
 // Please do NOT delete any comments to guarantee the correctness
 // of the scripts. ROS topics can be easly add by using those scripts. 
 
-#ifndef _template_node_h_
-#define _template_node_h_
+#ifndef _node_filename_h_
+#define _node_filename_h_
 
-#include "template.h"
+#include "class_filename.h"
 
 // ROS
 #include <ros/ros.h>
