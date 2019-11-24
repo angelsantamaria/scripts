@@ -310,7 +310,7 @@ function create_action_server
   pkg_path=$(pwd)
 
   #Set the filename and namespace on the template_alg files
-  cp ${SCRIPTS_PATH}/ros_node_templates/template_action_server.h ${pkg_path}/include/action_server.h
+  cp ${SCRIPTS_PATH}/ros_node_templates/template_action_server.h ${pkg_path}/include/${ros_pkg}/action_server.h
   echo "Creating action server file..."
 ################################################################################
 
@@ -324,7 +324,7 @@ function create_action_server
   add_line_to_file "${line}" "${comment}" "${node_h}"
 
   #look for include files and add them if are not already there
-  line="#include <action_server.h>"
+  line="#include <${ros_pkg}/action_server.h>"
   comment="\[action server client headers\]"
   add_line_to_file "${line}" "${comment}" "${node_h}"
 
@@ -547,5 +547,6 @@ function create_action_server
 ################################################################################
 #compile
   goto_catkin_workspace
-  catkin_make --only-pkg-with-deps ${ros_pkg}
+  #catkin_make --only-pkg-with-deps ${ros_pkg}
+  catkin build ${ros_pkg}
 }

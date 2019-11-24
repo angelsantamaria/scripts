@@ -344,8 +344,6 @@ function add_line_to_file
 # get_h_cpp_files
 # Looks for header files in include folder, if empty looks for headers files
 # in include/pkg_name folder.
-# Assumes that if headers files are in include/pkg_name, the source code is
-# in the same header file
 # - $1: pkg name
 function get_h_cpp_files
 {
@@ -365,15 +363,11 @@ function get_h_cpp_files
     then
       kill_exit "no include files found!"
     else
-      node_h=$( ls "include/${ros_pkg}" | grep "\node.h$" )
-      node_h="include/${ros_pkg}/${node_h}"
-      node_c=${node_h}
+      node_h="include/${ros_pkg}/${ros_pkg}.h"
+      node_c="src/${ros_pkg}.cpp"
     fi
   else
-    node_h=$( ls "include/" | grep "\node.h$" )
-    node_h="include/${node_h}"
-    node_c=$( ls "src/" | grep "\node.cpp$" )
-    node_c="src/${node_c}"
+    kill_exit "this node does not have the folder structure \"include/pkg_name/*.h\"!"
   fi
 }
 
