@@ -21,7 +21,7 @@
 #ifndef _class_filename_h_
 #define _class_filename_h_
 
-#include "alg_filename.h"
+#include "project_name/alg_filename.h"
 
 // ROS
 #include <ros/ros.h>

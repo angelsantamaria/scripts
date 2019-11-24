@@ -89,7 +89,7 @@ temps_folder="${SCRIPTS_PATH}/ros_node_templates/"
 
 
 # Create folders
-mkdir -p ${project_name}/include/
+mkdir -p ${project_name}/include/${project_name}
 mkdir -p ${project_name}/src/
 
 #create node basename
@@ -106,7 +106,7 @@ node_basename="${basename}Node"
 sed -e "s/alg_filename/${alg_filename}/g" \
     -e "s/ClassAlg/${alg_basename}/g" \
     -e "s/project_name/${project_name}/g" \
-    -e "s/BasenameConfig/${basename}Config/g" <${temps_folder}/template_alg.h >"${project_name}/include/${alg_filename}.h"
+    -e "s/BasenameConfig/${basename}Config/g" <${temps_folder}/template_alg.h >"${project_name}/include/${project_name}/${alg_filename}.h"
 sed -e "s/alg_filename/${alg_filename}/g" \
     -e "s/project_name/${project_name}/g" \
     -e "s/ClassAlg/${alg_basename}/g" <${temps_folder}/template_alg.cpp >"${project_name}/src/${alg_filename}.cpp"
@@ -121,7 +121,7 @@ sed -e "s/alg_filename/${alg_filename}/g" \
     -e "s/ClassAlg/${alg_basename}/g" \
     -e "s/class_filename/${class_filename}/g" \
     -e "s/project_name/${project_name}/g" \
-    -e "s/Class/${class_basename}/g" <${temps_folder}/template.h >"${project_name}/include/${class_filename}.h"
+    -e "s/Class/${class_basename}/g" <${temps_folder}/template.h >"${project_name}/include/${project_name}/${class_filename}.h"
 sed -e "s/class_filename/${class_filename}/g" \
     -e "s/project_name/${project_name}/g" \
     -e "s/ClassNode/${class_basename}/g" <${temps_folder}/template.cpp >"${project_name}/src/${class_filename}.cpp"
@@ -132,8 +132,9 @@ echo "Creating ${node_filename} files..."
 # Node .h and .cpp files
 
 #Set the filename and namespace on the template_node files
-sed -e "s/node_filename/${node_filename}/g" \
-    -e "s/class_filename/${class_filename}/g" <${temps_folder}/template_node.h >"${project_name}/include/${node_filename}.h"
+sed -e "s/project_name/${project_name}/g" \
+    -e "s/node_filename/${node_filename}/g" \
+    -e "s/class_filename/${class_filename}/g" <${temps_folder}/template_node.h >"${project_name}/include/${project_name}/${node_filename}.h"
 sed -e "s/project_name/${project_name}/g" \
     -e "s/node_filename/${node_filename}/g" \
     -e "s/ClassNode/${class_basename}/g" <${temps_folder}/template_node.cpp >"${project_name}/src/${node_filename}.cpp"

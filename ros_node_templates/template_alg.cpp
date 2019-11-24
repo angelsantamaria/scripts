@@ -1,4 +1,4 @@
-#include "alg_filename.h"
+#include "project_name/alg_filename.h"
 
 namespace project_name
 {

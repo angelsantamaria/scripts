@@ -1,4 +1,4 @@
-#include "class_filename.h"
+#include "project_name/class_filename.h"
 
 namespace project_name
 {
