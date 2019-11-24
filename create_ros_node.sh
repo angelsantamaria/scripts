@@ -145,7 +145,7 @@ echo "Creating ${node_filename} files..."
 
 mkdir -p ${project_name}/launch/
 
-sed -e "s/project_name/${project_name}/g" <${temps_folder}/template_launch.launch >"${project_name}/launch/${node_filename}.launch"
+sed -e "s/project_name/${project_name}/g" <${temps_folder}/template_launch.launch >"${project_name}/launch/${project_name}.launch"
 echo "Creating ${node_filename} launch file..."
 ################################################################################
 
