@@ -1,7 +1,7 @@
 <!--DOCTYPE html-->
 <launch>
 
-  <node pkg="template" type="template" name="template" output="screen">
+  <node pkg="project_name" type="project_name" name="project_name" output="screen">
   </node>
 
 </launch>

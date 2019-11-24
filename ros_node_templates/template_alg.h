@@ -18,22 +18,25 @@
 // Please do NOT delete any comments to guarantee the correctness
 // of the scripts. ROS topics can be easly add by using those scripts. 
 
-#ifndef _template_alg_h_
-#define _template_alg_h_
+#ifndef _alg_filename_h_
+#define _alg_filename_h_
 
-#include <template_namespace/TemplateConfig.h>
+#include <project_name/BasenameConfig.h>
 
 #include <pthread.h>
 
-//include template_alg main library
+//include alg_filename main library
+
+namespace project_name
+{
 
 /**
  * \brief define config type
  *
- * Define a Config type with the TemplateConfig. 
+ * Define a Config type with the BasenameConfig. 
  * All implementations will then use the same variable type Config.
  */
-typedef template_namespace::TemplateConfig Config;
+typedef project_name::BasenameConfig Config;
 
 /**
  * \brief Mutex class
@@ -46,7 +49,7 @@ class CMutex
     /**
      * \brief define config type
      *
-     * Define a Config type with the TemplateConfig. All driver implementations
+     * Define a Config type with the BasenameConfig. All driver implementations
      * will then use the same variable type Config.
      */
     pthread_mutex_t access_;
@@ -97,7 +100,7 @@ class CMutex
  *
  *
  */
-class TemplateAlg
+class ClassAlg
 {
   protected:
 
@@ -121,7 +124,7 @@ class TemplateAlg
     * In this constructor parameters related to the specific driver can be
     * initalized. Those parameters can be also set in the openDriver() function.
     */
-    TemplateAlg(void);
+    ClassAlg(void);
 
    /**
     * \brief Destructor
@@ -129,7 +132,7 @@ class TemplateAlg
     * This destructor is called when the object is about to be destroyed.
     *
     */
-    ~TemplateAlg(void);
+    ~ClassAlg(void);
 
     /**
      * \brief Lock Algorithm
@@ -154,8 +157,10 @@ class TemplateAlg
      */
     bool try_enter(void) { return this->alg_mutex_.try_enter(); }; 
   
-    // here define all template_alg interface methods to retrieve and set
+    // here define all alg_filename interface methods to retrieve and set
     // the driver parameters
 };
+
+} //end of namespace
 
 #endif

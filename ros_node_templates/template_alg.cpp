@@ -1,11 +1,16 @@
-#include "template_alg.h"
+#include "project_name/alg_filename.h"
 
-TemplateAlg::TemplateAlg(void)
+namespace project_name
+{
+
+ClassAlg::ClassAlg(void)
 {
 }
 
-TemplateAlg::~TemplateAlg(void)
+ClassAlg::~ClassAlg(void)
 {
 }
 
-// TemplateAlg Public API
+}
+
+// ClassAlg Public API

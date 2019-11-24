@@ -264,5 +264,6 @@ function create_service_server
 ################################################################################
 #compile
   goto_catkin_workspace
-  catkin_make --only-pkg-with-deps ${ros_pkg}
+  #catkin_make --only-pkg-with-deps ${ros_pkg}
+  catkin build ${ros_pkg}
 }

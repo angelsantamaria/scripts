@@ -68,6 +68,10 @@ then
 else
   exit 1;
 fi
+
+#create main class filename
+class_filename="${input_name}"
+
 #create alg filename
 alg_filename="${input_name}_alg"
 
@@ -83,43 +87,57 @@ create_basename ${input_name}
 #create templates folder path name
 temps_folder="${SCRIPTS_PATH}/ros_node_templates/"
 
-################################################################################
-# create template alg .h and .cpp files
 
-#create alg basename
-alg_basename="${basename}Algorithm"
-
-mkdir -p ${project_name}/include/
+# Create folders
+mkdir -p ${project_name}/include/${project_name}
 mkdir -p ${project_name}/src/
 
+#create node basename
+class_basename="${basename}Node"
+#create alg basename
+alg_basename="${basename}Algorithm"
+#create node basename
+node_basename="${basename}Node"
+
+################################################################################
+# Alg .h and .cpp files
+
 #Set the filename and namespace on the template_alg files
-sed -e "s/template_alg/${alg_filename}/g" \
-    -e "s/TemplateAlg/${alg_basename}/g" \
-    -e "s/template_namespace/${project_name}/g" \
-    -e "s/TemplateConfig/${basename}Config/g" <${temps_folder}/template_alg.h >"${project_name}/include/${alg_filename}.h"
-sed -e "s/template_alg/${alg_filename}/g" \
-    -e "s/TemplateAlg/${alg_basename}/g" <${temps_folder}/template_alg.cpp >"${project_name}/src/${alg_filename}.cpp"
+sed -e "s/alg_filename/${alg_filename}/g" \
+    -e "s/ClassAlg/${alg_basename}/g" \
+    -e "s/project_name/${project_name}/g" \
+    -e "s/BasenameConfig/${basename}Config/g" <${temps_folder}/template_alg.h >"${project_name}/include/${project_name}/${alg_filename}.h"
+sed -e "s/alg_filename/${alg_filename}/g" \
+    -e "s/project_name/${project_name}/g" \
+    -e "s/ClassAlg/${alg_basename}/g" <${temps_folder}/template_alg.cpp >"${project_name}/src/${alg_filename}.cpp"
 echo "Creating ${alg_filename} files..."
 ################################################################################
 
-
-
 ################################################################################
-# create template node .h and .cpp files
-
-#create node basename
-node_basename="${basename}Node"
-#echo "node_basename $node_basename"
+# Class .h and .cpp files
 
 #Set the filename and namespace on the template_node files
-sed -e "s/template_alg/${alg_filename}/g" \
-    -e "s/TemplateAlg/${alg_basename}/g" \
-    -e "s/template_node/${node_filename}/g" \
-    -e "s/TemplateNode/${node_basename}/g" <${temps_folder}/template_node.h >"${project_name}/include/${node_filename}.h"
-sed -e "s/template/${project_name}/g" \
-    -e "s/template_node/${node_filename}/g" \
-    -e "s/TemplateAlg/${alg_basename}/g" \
-    -e "s/TemplateNode/${node_basename}/g" <${temps_folder}/template_node.cpp >"${project_name}/src/${node_filename}.cpp"
+sed -e "s/alg_filename/${alg_filename}/g" \
+    -e "s/ClassAlg/${alg_basename}/g" \
+    -e "s/class_filename/${class_filename}/g" \
+    -e "s/project_name/${project_name}/g" \
+    -e "s/Class/${class_basename}/g" <${temps_folder}/template.h >"${project_name}/include/${project_name}/${class_filename}.h"
+sed -e "s/class_filename/${class_filename}/g" \
+    -e "s/project_name/${project_name}/g" \
+    -e "s/ClassNode/${class_basename}/g" <${temps_folder}/template.cpp >"${project_name}/src/${class_filename}.cpp"
+echo "Creating ${node_filename} files..."
+################################################################################
+
+################################################################################
+# Node .h and .cpp files
+
+#Set the filename and namespace on the template_node files
+sed -e "s/project_name/${project_name}/g" \
+    -e "s/node_filename/${node_filename}/g" \
+    -e "s/class_filename/${class_filename}/g" <${temps_folder}/template_node.h >"${project_name}/include/${project_name}/${node_filename}.h"
+sed -e "s/project_name/${project_name}/g" \
+    -e "s/node_filename/${node_filename}/g" \
+    -e "s/ClassNode/${class_basename}/g" <${temps_folder}/template_node.cpp >"${project_name}/src/${node_filename}.cpp"
 echo "Creating ${node_filename} files..."
 ################################################################################
 
@@ -128,18 +146,18 @@ echo "Creating ${node_filename} files..."
 
 mkdir -p ${project_name}/launch/
 
-sed -e "s/template/${project_name}/g" <${temps_folder}/template_launch.launch >"${project_name}/launch/${node_filename}.launch"
+sed -e "s/project_name/${project_name}/g" <${temps_folder}/template_launch.launch >"${project_name}/launch/${project_name}.launch"
 echo "Creating ${node_filename} launch file..."
 ################################################################################
 
 
 ################################################################################
 #Set the filename and namespace on the CMakeLists.txt file
-sed -e "s/template/${project_name}/g" \
-    -e "s/template_alg/${alg_filename}/g" \
-    -e "s/template_node/${node_filename}/g" \
-    -e "s/Template/${basename}/g" \
-    -e "s/template_node/${project_name}/g" <${temps_folder}/CMakeLists.txt >"${project_name}/CMakeLists.txt"
+sed -e "s/project_name/${project_name}/g" \
+    -e "s/alg_filename/${alg_filename}/g" \
+    -e "s/class_filename/${class_filename}/g" \
+    -e "s/node_filename/${node_filename}/g" \
+    -e "s/basename/${basename}/g" <${temps_folder}/CMakeLists.txt >"${project_name}/CMakeLists.txt"
 echo "Creating ${project_name} CMakeLists.txt file..."
 ################################################################################
 
@@ -156,10 +174,9 @@ else
 fi
 
 #Set the filename and namespace on the template.cfg file
-sed -e "s/template/${project_name}/g" \
-    -e "s/TemplateAlg/${alg_basename}/g" \
-    -e "s/template_node/${node_filename}/g" \
-    -e "s/Template/${basename}/g" <${temps_folder}/template_alg.cfg >"${project_name}/cfg/${basename}.cfg"
+sed -e "s/project_name/${project_name}/g" \
+    -e "s/alg_basename/${alg_basename}/g" \
+    -e "s/basename/${basename}/g" <${temps_folder}/template_alg.cfg >"${project_name}/cfg/${basename}.cfg"
 eval "chmod 775 ${project_name}/cfg/${basename}.cfg"
 echo "Creating ${cfg_filename}.cfg file..."
 ################################################################################
@@ -172,5 +189,7 @@ popd
 
 # WET
 goto_catkin_workspace
-catkin_make --only-pkg-with-deps ${project_name}
 
+# Uncomment this line depending on your needs
+#catkin_make --only-pkg-with-deps ${project_name}
+catkin build ${project_name}
