@@ -1,0 +1,19 @@
+cache:
+  key: ${CI_PROJECT_NAME}-${CI_PIPELINE_ID}-${CI_COMMIT_REF_SLUG}
+
+stages:
+  - build
+
+install_dependencies_and_build:
+  stage: build
+  script:
+    - apt update
+    - apt install -y --no-install-recommends apt-utils
+    - apt install -y cmake
+    - apt install -y libgflags-dev libgoogle-glog-dev
+    ### OWN Library
+    - cmake -Bbuild .
+    - make -j$(nproc) -C build
+    - make -C build install
+    - cd bin
+    - ./gtest*
