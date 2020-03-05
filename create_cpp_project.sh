@@ -310,7 +310,7 @@ esac
 if [ $CREATE_GITLABCI="Y" ]
 then
   echo "Creataing gitlab-CI structures";
-  cp $SCRIPTS_PATH/cpp_project_template/gitlab_ci_template.yml $ORIGNAME/.gitlab_ci_template.yml
+  cp $SCRIPTS_PATH/cpp_project_template/gitlab_ci_template.yml $ORIGNAME/.gitlab-ci.yml
 fi  
 
 echo "Project created."
