@@ -105,6 +105,19 @@ else
   mkdir $EXAMPLES_DIR
 fi  
 
+#create the src/tests directory
+TESTS_DIR="$ORIGNAME/src/tests"
+if [ -e "$TESTS_DIR" ]
+then
+  echo "  ! $TESTS_DIR directory already exists, skipping ..."
+else
+  echo "  > Creating $TESTS_DIR directory"
+  mkdir $TESTS_DIR
+  cp -r $SCRIPTS_PATH/cpp_project_template/gtest $TESTS_DIR/.
+  cp -r $SCRIPTS_PATH/cpp_project_template/utils_gtest.h $TESTS_DIR/.
+  cp -r $SCRIPTS_PATH/cpp_project_template/gtest_example.cpp $TESTS_DIR/.
+fi  
+
 # create the build directory
 BUILD_DIR="$ORIGNAME/build"
 if [ -e "$BUILD_DIR" ]
@@ -189,7 +202,16 @@ echo "        LIBRARY DESTINATION lib/${NAME}" >> CMakeLists.tmp
 echo "        ARCHIVE DESTINATION lib/${NAME})" >> CMakeLists.tmp
 echo "INSTALL(FILES "'${'"headers"'}' "DESTINATION include/${NAME})" >> CMakeLists.tmp
 echo "INSTALL(FILES ../Find$NAME.cmake DESTINATION "'${'"CMAKE_ROOT"'}'"/Modules/)" >> CMakeLists.tmp
+echo "" >> CMakeLists.tmp
+echo "### EXAMPLES ###" >> CMakeLists.tmp
 echo "ADD_SUBDIRECTORY(examples)" >> CMakeLists.tmp
+echo "" >> CMakeLists.tmp
+echo "### TESTS ###" >> CMakeLists.tmp
+echo "option(BUILD_TESTS \"Build tests\" ON)" >> CMakeLists.tmp
+echo "if(BUILD_TESTS)" >> CMakeLists.tmp
+echo "  MESSAGE(\"Building tests.\")" >> CMakeLists.tmp
+echo "  ADD_SUBDIRECTORY(tests)" >> CMakeLists.tmp
+echo "endif(BUILD_TESTS)" >> CMakeLists.tmp
 mv CMakeLists.tmp $ORIGNAME/src/CMakeLists.txt
   
 echo "# create an example application" >> CMakeLists.tmp
@@ -202,6 +224,23 @@ do
 done
 mv CMakeLists.tmp $ORIGNAME/src/examples/CMakeLists.txt
 
+echo "# Retrieve googletest from github & compile" >> CMakeLists.tmp
+echo "add_subdirectory(gtest)" >> CMakeLists.tmp
+echo "" >> CMakeLists.tmp
+echo "# Include gtest directory." >> CMakeLists.tmp
+echo "include_directories( "'${'"GTEST_INCLUDE_DIRS"'}'")" >> CMakeLists.tmp
+echo "" >> CMakeLists.tmp
+echo "############# USE THIS TEST AS AN EXAMPLE #################" >> CMakeLists.tmp
+echo "" >> CMakeLists.tmp
+echo "# Create a specific test executable for gtest_example" >> CMakeLists.tmp
+echo "add_own_gtest(gtest_example gtest_example.cpp)" >> CMakeLists.tmp
+echo "target_link_libraries(gtest_example ${NAME})" >> CMakeLists.tmp
+echo "" >> CMakeLists.tmp
+echo "################# ADD YOUR TESTS BELOW ####################" >> CMakeLists.tmp
+echo "#                                                         #" >> CMakeLists.tmp
+echo "#           ==== IN ALPHABETICAL ORDER! ====              #" >> CMakeLists.tmp
+echo "" >> CMakeLists.tmp
+mv CMakeLists.tmp $TESTS_DIR/CMakeLists.txt
 
 #Set the project name on the Findlib.cmake file
 sed 's/header_file/'"${NAME}.h"'/g' <$TEMPLATES_PATH/Findlib_template.cmake >tmp.cmake
@@ -254,5 +293,24 @@ else
   cp $SCRIPTS_PATH/cpp_project_template/gitignore_template $LIB_DIR/.gitignore
 fi
 
-echo "Project created."
+# ===== UNIT TESTING =====
 
+CREATE_GITLABCI="N"
+read -p "Do you want to add gitlab-CI (Y/n)?" yn
+if [ -z $yn ]
+then 
+  yn="Y"; 
+fi
+case $yn in
+    [Yy]* ) CREATE_GITLABCI="Y";;
+    [Nn]* ) echo "Avoiding creating gitlab-CI features";;
+    * ) echo "Please answer yes or no.";;
+esac
+
+if [ $CREATE_GITLABCI="Y" ]
+then
+  echo "Creataing gitlab-CI structures";
+  cp $SCRIPTS_PATH/cpp_project_template/gitlab_ci_template.yml $ORIGNAME/.gitlab_ci_template.yml
+fi  
+
+echo "Project created."
